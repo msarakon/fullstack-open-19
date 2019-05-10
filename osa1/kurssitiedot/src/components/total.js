@@ -2,9 +2,11 @@ import React from 'react'
 
 const Total = (props) => {
 
+  const total = props.parts.reduce((sum, part) => sum + part.exercises, 0)
+
   return (
     <div>
-      <p>yhteensä {props.total} tehtävää</p>
+      <p>yhteensä {total} tehtävää</p>
     </div>
   )
 }
