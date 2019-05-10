@@ -1,0 +1,15 @@
+title Uusi muistiinpano (SPA)
+
+note over selain:
+selain lähettää uuden muistiinpanon tiedot,
+lisää sen listaan ja uudelleenrenderöi muistiinpanot näytölle
+end note
+
+selain->palvelin: HTTP POST https://fullstack-exampleapp.herokuapp.com/new_note_spa {content: "testi", date: "..."}
+
+note over palvelin:
+palvelin lisää uuden muistiinpanon listaan
+ja palauttaa tiedon onnistuneesta tallennuksesta
+end note
+
+palvelin-->selain: OK-viesti
