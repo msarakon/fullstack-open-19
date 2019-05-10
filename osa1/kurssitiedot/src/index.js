@@ -1,5 +1,8 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
+import Header from './components/header'
+import Content from './components/content'
+import Total from './components/total'
 
 const App = () => {
   const course = 'Half Stack -sovelluskehitys'
@@ -12,17 +15,14 @@ const App = () => {
 
   return (
     <div>
-      <h1>{course}</h1>
-      <p>
-        {part1} {exercises1}
-      </p>
-      <p>
-        {part2} {exercises2}
-      </p>
-      <p>
-        {part3} {exercises3}
-      </p>
-      <p>yhteensä {exercises1 + exercises2 + exercises3} tehtävää</p>
+      <Header course={course} />
+      <Content part1={part1}
+               part2={part2}
+               part3={part3}
+               exercises1={exercises1}
+               exercises2={exercises2}
+               exercises3={exercises3} />
+      <Total total={exercises1 + exercises2 + exercises3} />
     </div>
   )
 }
