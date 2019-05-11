@@ -6,22 +6,27 @@ const App = () => {
   const courses = [
     {
       name: 'Half Stack -sovelluskehitys',
+      id: 1,
       parts: [
         {
           name: 'Reactin perusteet',
-          exercises: 10
+          exercises: 10,
+          id: 1
         },
         {
           name: 'Tiedonvälitys propseilla',
-          exercises: 7
+          exercises: 7,
+          id: 2
         },
         {
           name: 'Komponenttien tila',
-          exercises: 14
+          exercises: 14,
+          id: 3
         },
         {
           name: 'Redux',
-          exercises: 7
+          exercises: 7,
+          id: 4
         }
       ]
     },
@@ -32,12 +37,12 @@ const App = () => {
         {
           name: 'Routing',
           exercises: 3,
-          id: 1
+          id: 5
         },
         {
           name: 'Middlewaret',
           exercises: 7,
-          id: 2
+          id: 6
         }
       ]
     }
@@ -46,7 +51,7 @@ const App = () => {
   return (
     <div>
       {
-        courses.map(course => <Course course={course} /> )
+        courses.map(course => <Course key={course.id} course={course} /> )
       }
     </div>
   )
