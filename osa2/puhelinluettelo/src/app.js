@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import axios from 'axios'
+import personService from './person-service'
 import PersonFilter from './person-filter'
 import NewPersonForm from './new-person-form'
 import PersonList from './person-list'
@@ -11,21 +11,27 @@ const App = () => {
   const [ filterText, setFilterText ] = useState('')
 
   useEffect(() => {
-    axios
-      .get('http://localhost:3001/persons')
-      .then(response => {
-        setPersons(response.data)
-      })
+    personService.list().then(persons => setPersons(persons))
   }, [])
 
-  const addNewPerson = (event) => {
+  const addNewPerson = event => {
     event.preventDefault()
     if (persons.filter(person => person.name === newName).length > 0) {
       alert(`${newName} on jo luettelossa`)
     } else {
-      setPersons(persons.concat({ name: newName, number: newPhone }))
+      personService
+        .add({ name: newName, number: newPhone })
+        .then(newPerson => setPersons(persons.concat(newPerson)))
       setNewName('')
       setNewPhone('')
+    }
+  }
+
+  const removePerson = personToBeRemoved => {
+    if (window.confirm(`Poistetaanko ${personToBeRemoved.name}?`)) {
+      personService.remove(personToBeRemoved.id).then(() =>
+        setPersons(persons.filter(person => person.id !== personToBeRemoved.id))
+      )
     }
   }
 
@@ -45,7 +51,7 @@ const App = () => {
         newPhone={newPhone}
         handlePhoneChange={(e) => handlePhoneChange(e)} />
       <h2>Numerot</h2>
-      <PersonList persons={persons} filterText={filterText} />
+      <PersonList persons={persons} filterText={filterText} removePerson={(p) => removePerson(p)}/>
     </div>
   )
 
