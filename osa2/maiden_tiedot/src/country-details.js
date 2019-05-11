@@ -1,6 +1,15 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
+import axios from 'axios'
+import CountryWeather from './country-weather'
 
 const CountryDetails = ({ country }) => {
+  const [ weather, setWeather ] = useState({})
+
+  useEffect(() => {
+    const key = '516d66fac8774d4cb38102953191105'
+    const uri = encodeURI('http://api.apixu.com/v1/current.json?key=' + key + '&q=' + country.capital)
+    axios.get(uri).then(response => setWeather(response.data.current))
+  }, [country])
 
   return (
     <div>
@@ -16,6 +25,8 @@ const CountryDetails = ({ country }) => {
         }
       </ul>
       <img src={country.flag} alt="Flag" title="Flag" height="100px" />
+      <h2>Weather in {country.capital}</h2>
+      <CountryWeather weather={weather} />
     </div>
   );
 }
