@@ -1,33 +1,53 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import Header from './components/header'
-import Content from './components/content'
-import Total from './components/total'
+import Course from './components/course'
 
 const App = () => {
-  const course = {
-    name: 'Half Stack -sovelluskehitys',
-    parts: [
-      {
-        name: 'Reactin perusteet',
-        exercises: 10
-      },
-      {
-        name: 'Tiedonvälitys propseilla',
-        exercises: 7
-      },
-      {
-        name: 'Komponenttien tila',
-        exercises: 14
-      }
-    ]
-  }
+  const courses = [
+    {
+      name: 'Half Stack -sovelluskehitys',
+      parts: [
+        {
+          name: 'Reactin perusteet',
+          exercises: 10
+        },
+        {
+          name: 'Tiedonvälitys propseilla',
+          exercises: 7
+        },
+        {
+          name: 'Komponenttien tila',
+          exercises: 14
+        },
+        {
+          name: 'Redux',
+          exercises: 7
+        }
+      ]
+    },
+    {
+      name: 'Node.js',
+      id: 2,
+      parts: [
+        {
+          name: 'Routing',
+          exercises: 3,
+          id: 1
+        },
+        {
+          name: 'Middlewaret',
+          exercises: 7,
+          id: 2
+        }
+      ]
+    }
+  ]
 
   return (
     <div>
-      <Header course={course.name} />
-      <Content parts={course.parts} />
-      <Total parts={course.parts} />
+      {
+        courses.map(course => <Course course={course} /> )
+      }
     </div>
   )
 }
