@@ -16,8 +16,17 @@ const App = () => {
 
   const addNewPerson = event => {
     event.preventDefault()
-    if (persons.filter(person => person.name === newName).length > 0) {
-      alert(`${newName} on jo luettelossa`)
+    const existingPerson = persons.find(person => person.name === newName)
+    if (existingPerson) {
+      if (window.confirm(`${newName} on jo luettelossa, korvataanko vanha numero uudella?`)) {
+        personService
+          .update(existingPerson.id, { name: newName, number: newPhone })
+          .then(updatedPerson =>
+            setPersons(persons.map(person =>
+              person.id === updatedPerson.id ? updatedPerson : person 
+            ))
+          )
+      }
     } else {
       personService
         .add({ name: newName, number: newPhone })
