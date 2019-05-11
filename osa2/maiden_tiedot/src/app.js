@@ -25,7 +25,7 @@ const App = () => {
       <div>
         find countries <input value={filterText} onChange={filterCountries} />
       </div>
-      <CountryList countries={filteredCountries} />
+      <CountryList countries={filteredCountries} selectCountry={(c) => setFilterText(c.name)} />
     </div>
   );
 }
