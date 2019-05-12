@@ -44,10 +44,13 @@ const App = () => {
     } else {
       personService
         .add({ name: newName, number: newPhone })
-        .then(newPerson => setPersons(persons.concat(newPerson)))
-      showNotification(`Lisättiin ${newName}`)
-      setNewName('')
-      setNewPhone('')
+        .then(newPerson => {
+          setPersons(persons.concat(newPerson))
+          showNotification(`Lisättiin ${newName}`)
+          setNewName('')
+          setNewPhone('')
+        })
+        .catch(error => showError(error.response.data.error))
     }
   }
 
