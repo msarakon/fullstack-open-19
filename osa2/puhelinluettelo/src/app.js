@@ -26,7 +26,7 @@ const App = () => {
     setTimeout(() => setNotification({ msg: '', style: null }), 2000)
   }
 
-  const addNewPerson = event => {
+  const savePerson = event => {
     event.preventDefault()
     const existingPerson = persons.find(person => person.name === newName)
     if (existingPerson) {
@@ -39,12 +39,12 @@ const App = () => {
             ))
             showNotification(`Muutettiin henkilön ${newName} puhelinnumeroa`)
           })
+          .catch(error => showError(`${newName} on jo poistettu`))
       }
     } else {
       personService
         .add({ name: newName, number: newPhone })
         .then(newPerson => setPersons(persons.concat(newPerson)))
-        .catch(error => showError(`${newName} on jo poistettu`))
       showNotification(`Lisättiin ${newName}`)
       setNewName('')
       setNewPhone('')
@@ -71,7 +71,7 @@ const App = () => {
       <PersonFilter filterText={filterText} filter={(e) => filter(e)} />
       <h2>lisää uusi</h2>
       <NewPersonForm
-        addNewPerson={(e) => addNewPerson(e)}
+        savePerson={(e) => savePerson(e)}
         newName={newName}
         handleNameChange={(e) => handleNameChange(e)}
         newPhone={newPhone}

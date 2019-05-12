@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-const api = 'http://localhost:3001/persons'
+const api = 'http://localhost:3001/persons' //'/api/persons'
 
 const list = () => axios.get(api).then(response => response.data)
 const add = newItem => axios.post(api, newItem).then(response => response.data)
